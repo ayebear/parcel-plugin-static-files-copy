@@ -110,7 +110,7 @@ module.exports = bundler => {
                 const destStat = fs.statSync(dest);
                 const srcStat = fs.statSync(filepath);
                 if (destStat.mtime < srcStat.mtime) { // File was modified - let's copy it and inform about overwriting.
-                    pmLog(3, `Static file '${filepath}' already exists in '${bundleDir}'. Overwriting.`);
+                    pmLog(4, `Static file '${filepath}' already exists in '${bundleDir}'. Overwriting.`);
                     fs.copyFileSync(filepath, dest);
                 }
             } else {
@@ -181,7 +181,7 @@ module.exports = bundler => {
                 for (let singlePath of paths) {
                     let staticPath = path.join(pkg.pkgdir, singlePath);
                     if (!fs.existsSync(staticPath)) {
-                        pmLog(2, `Static path (file or directory) '${staticPath}' does not exist. Skipping.`);
+                        pmLog(3, `Static path (file or directory) '${staticPath}' does not exist. Skipping.`);
                         continue;
                     }
                     if (fs.statSync(staticPath).isDirectory()) {
@@ -202,7 +202,7 @@ module.exports = bundler => {
         }
 
         if (config.watcherGlob && bundler.watcher) {
-            pmLog(3, `Watching for changes in ${numWatches} static files.`);
+            pmLog(4, `Watching for changes in ${numWatches} static files.`);
         }
 
     });
